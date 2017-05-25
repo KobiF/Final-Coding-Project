@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <form>
+        First name: <input type="text" name="formName" id="firstNameForm"><br>
+        Last name: <input type="text" name="lastName" id="lastNameForm"><br>
+        Age: <input type="text" name="Age" id="ageForm"><br>
+        Eye Color: <input type="text" name="eye-Color" id="eyeColorForm"><br>
+        Favorite Activity: <input type="text" name="fav-Color" id="favoriteColorForm"><br>
+        Gender: <select id="genderForm">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+        Favorite Season: <select id="favoriteSeasonForm">
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+            <option value="Fall">Fall</option>
+            <option value="Winter">Winter</option>
+        </select><br>
+        <button type="button" onclick="createProfile()">Click Me!</button>
+    </form>
+    <p id="errorMessageBox"></p>
+    
+<script>
+    var allProfiles = []
+    function createProfile() {
+        var ageIsAPositiveNumber = (!(isNaN(parseInt(document.getElementById("ageForm").value))))&&((document.getElementById("ageForm").value)>0)
+        var allFilledIn = !(document.getElementById("firstNameForm").value==="" || document.getElementById("lastNameForm").value===""||document.getElementById("eyeColorForm").value===""||document.getElementById("favoriteColorForm").value===""||document.getElementById("ageForm").value==="")
+        if(ageIsAPositiveNumber&&allFilledIn){
+            newStudent = new Object();
+            newStudent.firstName = document.getElementById("firstNameForm").value;
+            newStudent.lastName = document.getElementById("lastNameForm").value;
+            newStudent.age = document.getElementById("ageForm").value;
+            newStudent.eyeColor = document.getElementById("eyeColorForm").value;
+            newStudent.favoriteActivity = document.getElementById("favoriteColorForm").value;
+            newStudent.gender = document.getElementById("genderForm").value;
+            newStudent.favoriteSeason = document.getElementById("favoriteSeasonForm").value;
+            
+            allProfiles.push(newStudent)
+            console.log(allProfiles)
+            
+            document.getElementById("errorMessageBox").innerHTML = ""
+        }else{
+            if(!(allFilledIn)){
+                document.getElementById("errorMessageBox").innerHTML = "Please fill in all boxes"
+            }else if(!(ageIsAPositiveNumber)){
+                if(isNaN(parseInt(document.getElementById("ageForm").value))){
+                    document.getElementById("errorMessageBox").innerHTML = "Please make your age a number"
+                }else if(!((document.getElementById("ageForm").value)>0)){
+                    document.getElementById("errorMessageBox").innerHTML = "Please make your age greater than 0"
+                }else{
+                    document.getElementById("errorMessageBox").innerHTML = "An Error Has Occured, please contact creator     Error:1"
+                }
+            }else{
+                document.getElementById("errorMessageBox").innerHTML = "An Error Has Occured, please contact creator     Error:2"
+            }
+        }
+    }
+</script>
+</body>
+
+</html>
